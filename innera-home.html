@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Innera — 라이프 스타일 코치</title>
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<meta property="og:title" content="Innera — 라이프 스타일 코치">
+<meta property="og:description" content="여러분의 삶의 스타일을 디자인해 드립니다.">
+<meta property="og:url" content="https://innera-kr.github.io">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand: #0c2f5d;
+  --brand-mid: #1a4a8a;
+  --brand-light: #2560b0;
+  --accent: #c8a96e;
+  --bg: #f5f2ec;
+  --bg-card: #faf8f4;
+  --text-main: #1a1a2e;
+  --text-body: #3a3a4e;
+  --text-muted: #8a8a9e;
+  --border: rgba(12,47,93,0.1);
+  --white: #ffffff;
+  --dark: #0a0f1a;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; color-scheme: light; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text-main);
+  overflow-x: hidden;
+  cursor: none;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  body { background: var(--bg) !important; color: var(--text-main) !important; }
+  .for-who { background: var(--bg) !important; }
+  .who-item { background: var(--bg-card) !important; }
+  .slide-section { background: var(--bg-card) !important; }
+  .slide-card { background: var(--bg) !important; }
+  .consult { background: var(--bg) !important; }
+  .cta-banner { background: var(--bg-card) !important; }
+}
+
+/* ── 커스텀 커서 ── */
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1.5px solid var(--brand);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  transform: translate(-50%, -50%);
+  mix-blend-mode: multiply;
+}
+
+.cursor-dot {
+  position: fixed;
+  width: 5px;
+  height: 5px;
+  background: var(--brand);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.05s ease;
+}
+
+.cursor-ring.hover {
+  width: 60px;
+  height: 60px;
+  border-color: var(--accent);
+  background: rgba(200,169,110,0.08);
+}
+
+.cursor-ring.dark {
+  border-color: rgba(255,255,255,0.6);
+}
+
+.cursor-dot.dark {
+  background: rgba(255,255,255,0.8);
+}
+
+/* ── 네비 ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 28px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.5s ease;
+}
+
+nav.scrolled {
+  background: rgba(245,242,236,0.92);
+  backdrop-filter: blur(16px);
+  padding: 16px 64px;
+  border-bottom: 1px solid var(--border);
+}
+
+nav.dark-nav {
+  background: transparent;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--white);
+  letter-spacing: 0.2em;
+  text-decoration: none;
+  transition: color 0.4s;
+}
+
+nav.scrolled .nav-logo { color: var(--brand); }
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  text-decoration: none;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  transition: color 0.3s;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -3px; left: 0; right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.nav-links a:hover::after { transform: scaleX(1); }
+
+nav.scrolled .nav-links a { color: var(--text-body); }
+nav.scrolled .nav-links a:hover { color: var(--brand); }
+
+.nav-cta {
+  padding: 10px 24px;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: var(--white) !important;
+  transition: all 0.3s !important;
+}
+
+.nav-cta:hover {
+  background: var(--white) !important;
+  color: var(--brand) !important;
+  border-color: var(--white) !important;
+}
+
+nav.scrolled .nav-cta {
+  border-color: var(--brand) !important;
+  color: var(--brand) !important;
+}
+
+nav.scrolled .nav-cta:hover {
+  background: var(--brand) !important;
+  color: var(--white) !important;
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: none;
+}
+
+.nav-toggle span {
+  display: block;
+  width: 24px;
+  height: 1.5px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+
+nav.scrolled .nav-toggle span { background: var(--brand); }
+
+/* ── 히어로 ── */
+.hero {
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: 80px;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80');
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  transition: transform 8s ease;
+  -webkit-background-size: cover;
+  background-attachment: scroll;
+}
+
+.hero-bg.loaded { transform: scale(1); }
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(5,10,25,0.3) 0%,
+    rgba(5,10,25,0.2) 40%,
+    rgba(5,10,25,0.65) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 64px;
+  width: 100%;
+}
+
+.hero-eyebrow {
+  font-size: 11px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  font-weight: 400;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.5s forwards;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(52px, 7vw, 96px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.7s forwards;
+}
+
+.hero-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.hero-sub {
+  font-size: 15px;
+  color: rgba(255,255,255,0.7);
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  margin-bottom: 40px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.9s forwards;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 20px;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.1s forwards;
+}
+
+.btn-ghost {
+  padding: 14px 36px;
+  border: 1px solid rgba(255,255,255,0.5);
+  color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  background: var(--white);
+  color: var(--brand);
+  border-color: var(--white);
+}
+
+.btn-accent-outline {
+  padding: 14px 36px;
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: all 0.3s ease;
+}
+
+.btn-accent-outline:hover {
+  background: var(--accent);
+  color: var(--brand);
+}
+
+/* 스크롤 인디케이터 */
+.scroll-indicator {
+  position: absolute;
+  right: 40px;
+  bottom: 40px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
+}
+
+.scroll-text {
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: rgba(255,255,255,0.5);
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.5), transparent);
+  animation: scrollPulse 2s ease infinite;
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.5; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(0.8); }
+}
+
+/* ── 마퀴 텍스트 ── */
+.marquee-section {
+  background: var(--brand);
+  padding: 18px 0;
+  overflow: hidden;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.marquee-track {
+  display: flex;
+  gap: 0;
+  animation: marquee 20s linear infinite;
+  white-space: nowrap;
+}
+
+.marquee-item {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.1em;
+  padding: 0 40px;
+  flex-shrink: 0;
+}
+
+.marquee-item span {
+  color: var(--accent);
+  margin: 0 16px;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── For Who ── */
+.for-who {
+  padding: 120px 64px;
+  background: var(--bg);
+}
+
+.section-header {
+  margin-bottom: 72px;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  display: block;
+}
+
+.section-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4vw, 56px);
+  font-weight: 300;
+  color: var(--brand);
+  line-height: 1.2;
+}
+
+.section-title em {
+  font-style: italic;
+  color: var(--accent);
+}
+
+.who-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.who-item {
+  background: var(--bg-card);
+  padding: 48px 40px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+
+.who-item::before {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.who-item:hover { background: #fff; }
+.who-item:hover::before { transform: scaleX(1); }
+
+.who-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  color: var(--accent);
+  opacity: 0.3;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.who-text {
+  font-size: 15px;
+  color: var(--brand);
+  font-weight: 400;
+  line-height: 1.65;
+}
+
+/* ── About ── */
+.about {
+  padding: 120px 64px;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.about::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(12,47,93,0.4) 0%, transparent 70%);
+}
+
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 100px;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+.about .eyebrow { color: var(--accent); }
+
+.about .section-title {
+  color: var(--white);
+  margin-bottom: 48px;
+}
+
+.about-story p {
+  font-size: 15px;
+  line-height: 2.1;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+
+.about-story em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 400;
+}
+
+.about-right {
+  padding-top: 80px;
+}
+
+.about-brand-box {
+  border: 1px solid rgba(255,255,255,0.08);
+  padding: 48px;
+  margin-bottom: 24px;
+  position: relative;
+}
+
+.about-brand-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 2px; height: 100%;
+  background: linear-gradient(to bottom, var(--accent), transparent);
+}
+
+.brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 40px;
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+
+.brand-meaning {
+  font-size: 10px;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.brand-desc {
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+}
+
+.about-values {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.value-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.value-item:last-child { border-bottom: none; }
+
+.value-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+  margin-top: 8px;
+}
+
+/* ── 슬라이드 섹션 (가로 스크롤) ── */
+.slide-section {
+  padding: 120px 0;
+  background: var(--bg-card);
+  overflow: hidden;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.slide-header {
+  padding: 0 64px;
+  margin-bottom: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 1100px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 64px;
+}
+
+.slide-track-wrap {
+  overflow: hidden;
+  padding: 0 64px;
+}
+
+.slide-track {
+  display: flex;
+  gap: 24px;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.slide-card {
+  flex-shrink: 0;
+  width: 320px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  padding: 40px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.slide-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 48px rgba(12,47,93,0.1);
+}
+
+.slide-card-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--accent);
+  opacity: 0.25;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.slide-card-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--brand);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.slide-card-desc {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+.slide-card-bar {
+  width: 32px; height: 1px;
+  background: var(--accent);
+  margin-bottom: 20px;
+}
+
+.slide-nav {
+  display: flex;
+  gap: 12px;
+}
+
+.slide-btn {
+  width: 44px; height: 44px;
+  border: 1px solid var(--border);
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: none;
+  transition: all 0.25s ease;
+  font-size: 16px;
+  color: var(--brand);
+}
+
+.slide-btn:hover {
+  background: var(--brand);
+  color: var(--white);
+  border-color: var(--brand);
+}
+
+/* ── 테스트 섹션 ── */
+.test-section {
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+  min-height: 600px;
+  display: flex;
+}
+
+.test-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  background-attachment: scroll;
+  -webkit-background-size: cover;
+}
+
+.test-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(10,22,40,0.92) 0%,
+    rgba(10,22,40,0.7) 60%,
+    rgba(10,22,40,0.3) 100%
+  );
+}
+
+.test-content {
+  position: relative;
+  z-index: 2;
+  padding: 100px 64px;
+  max-width: 600px;
+}
+
+.test-content .eyebrow { color: var(--accent); }
+
+.test-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 4.5vw, 56px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.2;
+  margin-bottom: 24px;
+}
+
+.test-desc {
+  font-size: 15px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+
+.test-types-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+
+.test-type-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.6);
+  font-weight: 300;
+}
+
+.test-type-dot {
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--accent);
+  flex-shrink: 0;
+}
+
+.btn-accent-fill {
+  padding: 16px 40px;
+  background: var(--accent);
+  color: var(--brand);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-accent-fill:hover {
+  background: #dfc08a;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,169,110,0.3);
+}
+
+/* ── 상담 섹션 ── */
+.consult {
+  padding: 120px 64px;
+  background: var(--bg);
+}
+
+.consult-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.consult-info h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--brand);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.consult-info p {
+  font-size: 15px;
+  line-height: 1.95;
+  color: var(--text-body);
+  font-weight: 300;
+  margin-bottom: 32px;
+}
+
+.consult-details {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 36px;
+  padding: 28px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+}
+
+.detail-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 14px;
+  color: var(--text-body);
+  font-weight: 300;
+}
+
+.detail-label {
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  font-weight: 500;
+  text-transform: uppercase;
+  min-width: 56px;
+}
+
+.consult-form-box {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  padding: 48px;
+  position: relative;
+}
+
+.consult-form-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--brand), var(--accent));
+}
+
+.form-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--brand);
+  margin-bottom: 32px;
+}
+
+.form-group { margin-bottom: 18px; }
+
+.form-label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 13px 16px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus { border-color: var(--brand); }
+
+.form-textarea { resize: vertical; min-height: 100px; }
+
+.form-submit {
+  width: 100%;
+  padding: 15px;
+  background: var(--brand);
+  color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  border: none;
+  cursor: none;
+  transition: all 0.25s ease;
+  margin-top: 8px;
+}
+
+.form-submit:hover { background: var(--brand-mid); }
+
+.form-privacy {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+/* ── 브런치 ── */
+.brunch {
+  padding: 120px 64px;
+  background: var(--dark);
+}
+
+.brunch-inner { max-width: 1100px; margin: 0 auto; }
+
+.brunch .eyebrow { color: var(--accent); }
+.brunch .section-title { color: var(--white); }
+
+.brunch-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+}
+
+.brunch-more {
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  text-decoration: none;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+  padding-bottom: 2px;
+  transition: all 0.2s;
+}
+
+.brunch-more:hover { color: var(--accent); border-color: var(--accent); }
+
+.brunch-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.brunch-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.06);
+  padding: 36px;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.brunch-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.brunch-card:hover {
+  background: rgba(255,255,255,0.07);
+  transform: translateY(-3px);
+}
+
+.brunch-card:hover::after { transform: scaleX(1); }
+
+.brunch-date {
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.brunch-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.brunch-desc {
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+/* ── CTA 배너 ── */
+.cta-banner {
+  padding: 100px 64px;
+  background: var(--bg-card);
+  border-top: 1px solid var(--border);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-banner::before {
+  content: 'INNERA';
+  position: absolute;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 200px;
+  font-weight: 300;
+  color: rgba(12,47,93,0.03);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  white-space: nowrap;
+  pointer-events: none;
+  letter-spacing: 0.1em;
+}
+
+.cta-inner { position: relative; z-index: 1; }
+
+.cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 300;
+  color: var(--brand);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.cta-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  font-weight: 300;
+  margin-bottom: 40px;
+  line-height: 1.8;
+}
+
+.btn-primary-fill {
+  padding: 16px 48px;
+  background: var(--brand);
+  color: var(--white);
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.btn-primary-fill:hover {
+  background: var(--brand-mid);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(12,47,93,0.2);
+}
+
+/* ── 푸터 ── */
+footer {
+  background: var(--dark);
+  padding: 64px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+}
+
+.footer-brand p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+
+.footer-brand span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.footer-nav a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+
+.footer-nav a:hover { color: var(--accent); }
+
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+}
+
+/* ── 애니메이션 ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ── 반응형 ── */
+@media (max-width: 1024px) {
+  nav { padding: 20px 32px; }
+  nav.scrolled { padding: 14px 32px; }
+  .hero-content { padding: 0 32px; }
+  .for-who, .about, .consult, .brunch, .cta-banner { padding: 80px 32px; }
+  .slide-section { padding: 80px 0; }
+  .slide-header { padding: 0 32px; }
+  .slide-track-wrap { padding: 0 32px; }
+  .test-content { padding: 80px 32px; }
+  footer { padding: 48px 32px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-mobile-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 60px; left: 0; right: 0;
+    background: rgba(245,242,236,0.97);
+    padding: 24px 32px;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-mobile-open .nav-links a { color: var(--text-body); }
+
+  .hero-title { font-size: clamp(40px, 10vw, 64px); }
+  .who-grid { grid-template-columns: 1fr 1fr; }
+  .about-inner { grid-template-columns: 1fr; gap: 48px; }
+  .about-right { padding-top: 0; }
+  .consult-inner { grid-template-columns: 1fr; gap: 48px; }
+  .brunch-grid { grid-template-columns: 1fr; }
+  .footer-top { flex-direction: column; gap: 32px; }
+  .footer-nav { flex-wrap: wrap; gap: 20px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+  .hero-actions { flex-direction: column; align-items: flex-start; }
+  .cursor-ring, .cursor-dot { display: none; }
+  body { cursor: auto; }
+  * { cursor: auto !important; }
+
+  /* 모바일 다크 섹션 밝게 */
+  .about { background: #12203a; }
+  .about::before { opacity: 0.3; }
+  .about-story p { color: rgba(255,255,255,0.75); }
+  .about-brand-box { border-color: rgba(255,255,255,0.15); }
+  .value-item { color: rgba(255,255,255,0.65); border-bottom-color: rgba(255,255,255,0.1); }
+
+  .for-who { background: var(--bg); }
+  .who-item { background: #fff; }
+  .who-item:hover { background: #fff; }
+
+  .brunch { background: #12203a; }
+  .brunch-card { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.1); }
+  .brunch-title { color: rgba(255,255,255,0.9); }
+  .brunch-desc { color: rgba(255,255,255,0.5); }
+
+  .slide-section { background: var(--bg-card); }
+  .slide-card { background: #fff; width: calc(100vw - 40px) !important; }
+}
+
+@media (max-width: 560px) {
+  .who-grid { grid-template-columns: 1fr; }
+  nav { padding: 18px 20px; }
+  nav.scrolled { padding: 12px 20px; }
+  .hero-content, .for-who, .about, .consult, .brunch, .cta-banner { padding-left: 20px; padding-right: 20px; }
+  .slide-header, .slide-track-wrap { padding-left: 20px; padding-right: 20px; }
+  .test-content { padding: 64px 20px; }
+  footer { padding: 40px 20px; }
+}
+</style>
+</head>
+<body>
+
+<!-- 커스텀 커서 -->
+<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-dot" id="cursorDot"></div>
+
+<!-- 네비 -->
+<nav id="navbar" class="dark-nav">
+  <a href="#" class="nav-logo">Innera</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#test">Test</a></li>
+    <li><a href="#consult">Consult</a></li>
+    <li><a href="#brunch">Journal</a></li>
+    <li><a href="#consult" class="nav-cta">상담 신청</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="toggleMobile()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- 히어로 -->
+<section class="hero" id="home">
+  <div class="hero-bg" id="heroBg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-eyebrow">Innera · 라이프 스타일 코치</p>
+    <h1 class="hero-title">
+      여러분의 삶의<br>
+      스타일을 <em>디자인</em>해<br>
+      드립니다.
+    </h1>
+    <p class="hero-sub">내면에서부터 시작되는 변화 — 진짜 내가 원하는 삶을 함께 찾아가는 곳</p>
+    <div class="hero-actions">
+      <a href="#test" class="btn-ghost">나침반 테스트 →</a>
+      <a href="#consult" class="btn-accent-outline">상담 신청</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span class="scroll-text">Scroll</span>
+  </div>
+</section>
+
+<!-- 마퀴 -->
+<div class="marquee-section">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Lifestyle Design <span>✦</span></span>
+    <span class="marquee-item">Mindset Coaching <span>✦</span></span>
+    <span class="marquee-item">삶의 방향 설계 <span>✦</span></span>
+    <span class="marquee-item">1:1 탐색 상담 <span>✦</span></span>
+    <span class="marquee-item">내면의 변화 <span>✦</span></span>
+    <span class="marquee-item">Innera <span>✦</span></span>
+    <span class="marquee-item">Lifestyle Design <span>✦</span></span>
+    <span class="marquee-item">Mindset Coaching <span>✦</span></span>
+    <span class="marquee-item">삶의 방향 설계 <span>✦</span></span>
+    <span class="marquee-item">1:1 탐색 상담 <span>✦</span></span>
+    <span class="marquee-item">내면의 변화 <span>✦</span></span>
+    <span class="marquee-item">Innera <span>✦</span></span>
+  </div>
+</div>
+
+<!-- For Who -->
+<section class="for-who" id="forwho">
+  <div style="max-width:1100px; margin:0 auto;">
+    <div class="section-header reveal">
+      <span class="eyebrow">이런 분들과 함께합니다</span>
+      <h2 class="section-title">지금 이 중 하나라도<br><em>해당된다면</em></h2>
+    </div>
+    <div class="who-grid">
+      <div class="who-item reveal reveal-delay-1">
+        <p class="who-num">01</p>
+        <p class="who-text">인생의 악순환에 갇혀<br>빠져나오고 싶은 분</p>
+      </div>
+      <div class="who-item reveal reveal-delay-2">
+        <p class="who-num">02</p>
+        <p class="who-text">내가 뭘 좋아하고<br>뭘 잘하는지 모르는 분</p>
+      </div>
+      <div class="who-item reveal reveal-delay-3">
+        <p class="who-num">03</p>
+        <p class="who-text">행복하고 싶은데<br>삶이 우울하게 느껴지는 분</p>
+      </div>
+      <div class="who-item reveal reveal-delay-1">
+        <p class="who-num">04</p>
+        <p class="who-text">삶의 방향을 잃고<br>표류하고 있는 분</p>
+      </div>
+      <div class="who-item reveal reveal-delay-2">
+        <p class="who-num">05</p>
+        <p class="who-text">인생을 바꿔보고<br>싶은 분</p>
+      </div>
+      <div class="who-item reveal reveal-delay-3">
+        <p class="who-num">06</p>
+        <p class="who-text">변화를 원하지만<br>어디서 시작해야 할지 모르는 분</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-inner">
+    <div>
+      <div class="section-header reveal">
+        <span class="eyebrow">About Innera</span>
+        <h2 class="section-title" style="color:var(--white);">이네라를 시작하게 된 이야기</h2>
+      </div>
+      <div class="about-story reveal">
+        <p>어려서부터 하고 싶은 게 많았습니다. 그만큼 다양한 분야를 공부하고 경험했지만, 매년 새해 목표에 빠지지 않는 키워드가 하나 있었어요. 바로 <em>'성장'</em>이었습니다.</p>
+        <p>특정 자격증이나 기술을 넘어서, 더 근본적으로 나를 발전시킬 수 있는 무언가를 항상 갈망하고 있었어요. 그러다 우연히 알게 된 것이 <em>마인드셋</em>이었고, 보자마자 "아, 이거다"라는 확신이 들었습니다.</p>
+        <p>마인드셋을 접하면서 짧은 시간 안에 스스로 성장해 나아가고 있다는 걸 느꼈고, 내가 원하는 방향으로 살아간다는 게 이렇게나 즐거운 일이었다는 것도 처음 알았어요. <em>정말 살아있다는 기분</em>이 들었습니다.</p>
+        <p>그렇게 살아가다 보니, 힘들어하는 주변 사람들이 눈에 들어오기 시작했어요. 도움을 주면서 큰 즐거움과 성취감을 느꼈고, 돌아보니 제가 가장 즐거워하는 일이 바로 <em>'누군가를 가르치고 도움을 주는 것'</em>이었다는 걸 깨달았습니다.</p>
+        <p>그렇게 이네라가 시작되었습니다.</p>
+      </div>
+    </div>
+    <div class="about-right reveal">
+      <div class="about-brand-box">
+        <p class="brand-name">Innera</p>
+        <span class="brand-meaning">inner + era</span>
+        <p class="brand-desc">내면(inner)이 변하면서 시작되는 새로운 시대(era). 외부의 성공이나 기준이 아닌, 내면에서부터 시작되는 진짜 변화를 추구합니다.</p>
+      </div>
+      <div class="about-values">
+        <div class="value-item">
+          <span class="value-dot"></span>
+          <span>완성된 전문가가 아닌, 함께 탐구해가는 사람으로서의 포지션</span>
+        </div>
+        <div class="value-item">
+          <span class="value-dot"></span>
+          <span>성공이나 부를 부정하지 않되, 그것이 전부가 아님</span>
+        </div>
+        <div class="value-item">
+          <span class="value-dot"></span>
+          <span>내면의 변화가 삶의 방향을 바꾼다</span>
+        </div>
+        <div class="value-item">
+          <span class="value-dot"></span>
+          <span>진짜 원하는 삶은 스스로 설계할 수 있다</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 슬라이드 카드 -->
+<section class="slide-section">
+  <div class="slide-header reveal">
+    <div>
+      <span class="eyebrow">이네라와 함께하면</span>
+      <h2 class="section-title" style="font-size:clamp(28px,3vw,40px);">함께 탐구하는<br><em style="font-style:italic; color:var(--accent);">다섯 가지 여정</em></h2>
+    </div>
+    <div class="slide-nav">
+      <button class="slide-btn" onclick="slideMove(-1)">←</button>
+      <button class="slide-btn" onclick="slideMove(1)">→</button>
+    </div>
+  </div>
+  <div class="slide-track-wrap">
+    <div class="slide-track" id="slideTrack">
+      <div class="slide-card">
+        <p class="slide-card-num">01</p>
+        <div class="slide-card-bar"></div>
+        <p class="slide-card-title">나를 알아가는 탐색</p>
+        <p class="slide-card-desc">내가 뭘 원하고, 무엇을 좋아하는지. 흐릿해진 나 자신의 신호를 다시 감지하는 시간.</p>
+      </div>
+      <div class="slide-card">
+        <p class="slide-card-num">02</p>
+        <div class="slide-card-bar"></div>
+        <p class="slide-card-title">삶의 방향 설계</p>
+        <p class="slide-card-desc">막연하게 살아왔다면, 이제 내가 원하는 방향을 함께 그려봐요. 작은 나침반 하나부터 시작합니다.</p>
+      </div>
+      <div class="slide-card">
+        <p class="slide-card-num">03</p>
+        <div class="slide-card-bar"></div>
+        <p class="slide-card-title">마인드셋 전환</p>
+        <p class="slide-card-desc">삶이 바뀌는 건 환경이 아니라 내면에서부터예요. 나를 가로막는 패턴을 인식하고 바꿔나갑니다.</p>
+      </div>
+      <div class="slide-card">
+        <p class="slide-card-num">04</p>
+        <div class="slide-card-bar"></div>
+        <p class="slide-card-title">지속 가능한 변화</p>
+        <p class="slide-card-desc">한 번의 동기부여가 아닌, 매일의 삶에서 실제로 작동하는 변화를 함께 만들어갑니다.</p>
+      </div>
+      <div class="slide-card">
+        <p class="slide-card-num">05</p>
+        <div class="slide-card-bar"></div>
+        <p class="slide-card-title">함께 성장하는 동반</p>
+        <p class="slide-card-desc">이네라는 정답을 주는 곳이 아니에요. 당신의 여정 옆에서 함께 걷는 동반자가 되고 싶어요.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 테스트 -->
+<section class="test-section" id="test">
+  <div class="test-bg"></div>
+  <div class="test-overlay"></div>
+  <div class="test-content reveal">
+    <span class="eyebrow">이네라 나침반 테스트</span>
+    <h2 class="test-title">나는 지금<br>어디쯤 서 있을까?</h2>
+    <p class="test-desc">20문항으로 알아보는 나의 삶의 유형.<br>자기결정이론 기반, 5가지 유형 진단.</p>
+    <div class="test-types-list">
+      <div class="test-type-item"><span class="test-type-dot"></span>결승선을 모르는 마라토너</div>
+      <div class="test-type-item"><span class="test-type-dot"></span>닻을 올린 채 멈춘 사람</div>
+      <div class="test-type-item"><span class="test-type-dot"></span>출발선 앞에 서 있는 사람</div>
+      <div class="test-type-item"><span class="test-type-dot"></span>남의 대본 속에 사는 사람</div>
+      <div class="test-type-item"><span class="test-type-dot"></span>첫 장을 펼친 사람</div>
+    </div>
+    <a href="https://innera-kr.github.io/innera-quiz/" target="_blank" class="btn-accent-fill">테스트 시작하기 →</a>
+  </div>
+</section>
+
+<!-- 상담 -->
+<section class="consult" id="consult">
+  <div class="consult-inner">
+    <div class="consult-info reveal">
+      <span class="eyebrow">1:1 상담</span>
+      <h2 class="section-title" style="font-size:clamp(28px,3vw,40px); margin-bottom:24px;">함께 들여다보는<br><em style="font-style:italic; color:var(--accent);">시간</em></h2>
+      <p>정답을 알려주는 시간이 아닙니다. 지금 내가 어떤 상태인지, 진짜 원하는 게 무엇인지, 함께 들여다보고 탐구하는 시간이에요.</p>
+      <div class="consult-details">
+        <div class="detail-row">
+          <span class="detail-label">방식</span>
+          <span>Google Meet 화상 상담</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">시간</span>
+          <span>30분 내외</span>
+        </div>
+        <div class="detail-row">
+          <span class="detail-label">대상</span>
+          <span>삶의 방향이 궁금한 누구나</span>
+        </div>
+      </div>
+      <p style="font-size:13px; color:var(--text-muted); font-weight:300; line-height:1.8;">나침반 테스트를 먼저 해보시면 더 깊은 대화가 가능해요.</p>
+    </div>
+    <div class="consult-form-box reveal">
+      <p class="form-title">상담 신청하기</p>
+      <div class="form-group">
+        <label class="form-label">이름</label>
+        <input type="text" class="form-input" placeholder="이름을 입력해주세요" id="consultName">
+      </div>
+      <div class="form-group">
+        <label class="form-label">이메일</label>
+        <input type="email" class="form-input" placeholder="연락받으실 이메일" id="consultEmail">
+      </div>
+      <div class="form-group">
+        <label class="form-label">간단한 이야기 (선택)</label>
+        <textarea class="form-input form-textarea" placeholder="지금 어떤 부분이 고민이신가요?" id="consultMsg"></textarea>
+      </div>
+      <button class="form-submit" onclick="submitConsult()">신청하기 →</button>
+      <p class="form-privacy">수집된 정보는 상담 안내 외 다른 용도로 사용되지 않습니다.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 브런치 -->
+<section class="brunch" id="brunch">
+  <div class="brunch-inner">
+    <div class="brunch-header reveal">
+      <div>
+        <span class="eyebrow">브런치 · 마음온도계</span>
+        <h2 class="section-title">이네라의 글</h2>
+      </div>
+      <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-more">브런치에서 더 보기 →</a>
+    </div>
+    <div class="brunch-grid">
+      <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-card reveal reveal-delay-1">
+        <p class="brunch-date">브런치</p>
+        <p class="brunch-title">열심히 사는데 왜 공허할까</p>
+        <p class="brunch-desc">바쁘게 달리고 있는데 텅 빈 느낌이 드는 이유에 대해.</p>
+      </a>
+      <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-card reveal reveal-delay-2">
+        <p class="brunch-date">브런치</p>
+        <p class="brunch-title">내가 진짜 원하는 게 뭔지 모르겠을 때</p>
+        <p class="brunch-desc">방향을 잃었다는 건 아직 찾고 있다는 뜻이에요.</p>
+      </a>
+      <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-card reveal reveal-delay-3">
+        <p class="brunch-date">브런치</p>
+        <p class="brunch-title">이네라의 글을 만나보세요</p>
+        <p class="brunch-desc">삶의 방향, 마인드셋, 내면의 변화에 대한 이야기를 씁니다.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 배너 -->
+<section class="cta-banner">
+  <div class="cta-inner reveal">
+    <h2 class="cta-title">지금 이 질문을 하고 있다는 것,<br>그 자체가 이미 시작이에요.</h2>
+    <p class="cta-sub">이네라는 정답을 알려주는 곳이 아니에요.<br>당신이 진짜 원하는 삶이 뭔지, 함께 들여다보는 곳이에요.</p>
+    <a href="#consult" class="btn-primary-fill">1:1 상담 신청하기</a>
+  </div>
+</section>
+
+<!-- 푸터 -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <p>Innera</p>
+      <span>여러분의 삶의 스타일을 디자인해 드립니다.</span>
+    </div>
+    <ul class="footer-nav">
+      <li><a href="#about">About</a></li>
+      <li><a href="#test">Test</a></li>
+      <li><a href="#consult">Consult</a></li>
+      <li><a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank">Journal</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Innera. All rights reserved.</span>
+    <span>innera.life@gmail.com</span>
+  </div>
+</footer>
+
+<script>
+// ── 커스텀 커서 ──
+const ring = document.getElementById('cursorRing');
+const dot = document.getElementById('cursorDot');
+let mx = 0, my = 0, rx = 0, ry = 0;
+
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  dot.style.left = mx + 'px';
+  dot.style.top = my + 'px';
+});
+
+function animateCursor() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) * 0.12;
+  ring.style.left = rx + 'px';
+  ring.style.top = ry + 'px';
+  requestAnimationFrame(animateCursor);
+}
+animateCursor();
+
+// 다크 섹션에서 커서 색상 변경
+function updateCursorColor() {
+  const darkSections = document.querySelectorAll('.hero, .about, .test-section, .brunch');
+  let isDark = false;
+  darkSections.forEach(sec => {
+    const rect = sec.getBoundingClientRect();
+    if (my > rect.top && my < rect.bottom && mx > rect.left && mx < rect.right) isDark = true;
+  });
+  ring.classList.toggle('dark', isDark);
+  dot.classList.toggle('dark', isDark);
+}
+
+document.addEventListener('mousemove', updateCursorColor);
+
+// 호버 효과
+document.querySelectorAll('a, button, .who-item, .brunch-card, .slide-card').forEach(el => {
+  el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+  el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+});
+
+// ── 네비 스크롤 ──
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('navbar');
+  if (window.scrollY > 80) {
+    nav.classList.add('scrolled');
+    nav.classList.remove('dark-nav');
+  } else {
+    nav.classList.remove('scrolled');
+    nav.classList.add('dark-nav');
+  }
+});
+
+// ── 모바일 메뉴 ──
+function toggleMobile() {
+  document.getElementById('navbar').classList.toggle('nav-mobile-open');
+}
+
+// ── 히어로 배경 로드 ──
+window.addEventListener('load', () => {
+  document.getElementById('heroBg').classList.add('loaded');
+});
+
+// ── 스크롤 reveal ──
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08 });
+revealEls.forEach(el => observer.observe(el));
+
+// ── 슬라이드 ──
+let slideIndex = 0;
+function slideMove(dir) {
+  const track = document.getElementById('slideTrack');
+  const cards = track.querySelectorAll('.slide-card');
+  const visibleCount = window.innerWidth <= 768 ? 1 : 3;
+  const maxIndex = cards.length - visibleCount;
+  slideIndex = Math.max(0, Math.min(slideIndex + dir, maxIndex));
+  const cardW = cards[0].offsetWidth + 24;
+  track.style.transform = `translateX(-${slideIndex * cardW}px)`;
+}
+
+// 터치 스와이프
+const slideWrap = document.querySelector('.slide-track-wrap');
+let touchStartX = 0;
+slideWrap.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+slideWrap.addEventListener('touchend', e => {
+  const diff = touchStartX - e.changedTouches[0].clientX;
+  if (Math.abs(diff) > 40) slideMove(diff > 0 ? 1 : -1);
+});
+
+// 마우스 휠 좌우 스크롤
+slideWrap.addEventListener('wheel', e => {
+  if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+    e.preventDefault();
+    slideMove(e.deltaY > 0 ? 1 : -1);
+  }
+}, { passive: false });
+
+// ── 상담 신청 ──
+async function submitConsult() {
+  const name = document.getElementById('consultName').value.trim();
+  const email = document.getElementById('consultEmail').value.trim();
+  const msg = document.getElementById('consultMsg').value.trim();
+  if (!name || !email) { alert('이름과 이메일을 입력해주세요.'); return; }
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) { alert('올바른 이메일 형식을 입력해주세요.'); return; }
+  const btn = document.querySelector('.form-submit');
+  btn.textContent = '전송 중...';
+  btn.disabled = true;
+  try {
+    await fetch('https://script.google.com/macros/s/AKfycbw_72TPHBk-by7N_RakMInDZlmNk-gjUr85oNk76bwXRo9GoQx1bgmFuCeqUuT_LinG_Q/exec', {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, contact: email, type: '홈페이지 상담신청', typeName: msg || '내용 없음' })
+    });
+  } catch(e) {}
+  document.querySelector('.consult-form-box').innerHTML = `
+    <div style="text-align:center; padding:60px 0;">
+      <p style="font-family:'Cormorant Garamond',serif; font-size:28px; color:var(--brand); font-weight:300; margin-bottom:12px;">신청이 완료됐어요</p>
+      <p style="font-size:14px; color:var(--text-muted); font-weight:300; line-height:1.8;">${name}님, 곧 연락드릴게요.<br>잠시만 기다려주세요.</p>
+    </div>
+  `;
+}
+</script>
+</body>
+</html>
