@@ -51,15 +51,14 @@ body {
 /* ── 커스텀 커서 ── */
 .cursor-ring {
   position: fixed;
-  width: 36px;
-  height: 36px;
+  width: 28px;
+  height: 28px;
   border: 1.5px solid var(--brand);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.15s ease, width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
   transform: translate(-50%, -50%);
-  mix-blend-mode: multiply;
 }
 
 .cursor-dot {
@@ -75,8 +74,8 @@ body {
 }
 
 .cursor-ring.hover {
-  width: 60px;
-  height: 60px;
+  width: 48px;
+  height: 48px;
   border-color: var(--accent);
   background: rgba(200,169,110,0.08);
 }
@@ -209,7 +208,7 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=80');
+  background-image: url('https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=1800&q=80');
   background-size: cover;
   background-position: center;
   transform: scale(1.05);
@@ -517,7 +516,7 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
   font-size: 15px;
   line-height: 2.1;
   color: rgba(255,255,255,0.6);
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 20px;
 }
 
@@ -568,7 +567,7 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
   font-size: 14px;
   line-height: 1.9;
   color: rgba(255,255,255,0.5);
-  font-weight: 300;
+  font-weight: 400;
 }
 
 .about-values {
@@ -585,7 +584,7 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
   border-bottom: 1px solid rgba(255,255,255,0.06);
   font-size: 13px;
   color: rgba(255,255,255,0.5);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
 }
 
@@ -669,7 +668,7 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
 .slide-card-desc {
   font-size: 13px;
   color: var(--text-muted);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.8;
 }
 
@@ -715,7 +714,9 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
 .test-bg {
   position: absolute;
   inset: 0;
-  background-image: url('https://images.unsplash.com/photo-1528716321680-815a8cdb8cbe?w=1600&q=80');
+  background-image: url('https://images.unsplash.com/photo-1682685795463-0674c065f315?q=80&w=1600&auto=format&fit=crop');
+  background-attachment: scroll;
+  -webkit-background-size: cover;
   background-size: cover;
   background-position: center;
   background-attachment: scroll;
@@ -727,9 +728,9 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
   inset: 0;
   background: linear-gradient(
     to right,
-    rgba(10,22,40,0.92) 0%,
-    rgba(10,22,40,0.7) 60%,
-    rgba(10,22,40,0.3) 100%
+    rgba(10,22,40,0.82) 0%,
+    rgba(10,22,40,0.55) 60%,
+    rgba(10,22,40,0.2) 100%
   );
 }
 
@@ -755,7 +756,7 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
   font-size: 15px;
   line-height: 1.9;
   color: rgba(255,255,255,0.6);
-  font-weight: 300;
+  font-weight: 400;
   margin-bottom: 40px;
 }
 
@@ -1024,7 +1025,7 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
 .brunch-desc {
   font-size: 13px;
   color: rgba(255,255,255,0.35);
-  font-weight: 300;
+  font-weight: 400;
   line-height: 1.7;
 }
 
@@ -1298,13 +1299,13 @@ footer {
     <span class="marquee-item">Lifestyle Design <span>✦</span></span>
     <span class="marquee-item">Mindset Coaching <span>✦</span></span>
     <span class="marquee-item">삶의 방향 설계 <span>✦</span></span>
-    <span class="marquee-item">1:1 탐색 상담 <span>✦</span></span>
+    <span class="marquee-item"><span style="font-family:'Noto Sans KR',sans-serif;font-weight:400;color:inherit;margin-right:4px;">1:1</span>탐색 상담 <span>✦</span></span>
     <span class="marquee-item">내면의 변화 <span>✦</span></span>
     <span class="marquee-item">Innera <span>✦</span></span>
     <span class="marquee-item">Lifestyle Design <span>✦</span></span>
     <span class="marquee-item">Mindset Coaching <span>✦</span></span>
     <span class="marquee-item">삶의 방향 설계 <span>✦</span></span>
-    <span class="marquee-item">1:1 탐색 상담 <span>✦</span></span>
+    <span class="marquee-item"><span style="font-family:'Noto Sans KR',sans-serif;font-weight:400;color:inherit;margin-right:4px;">1:1</span>탐색 상담 <span>✦</span></span>
     <span class="marquee-item">내면의 변화 <span>✦</span></span>
     <span class="marquee-item">Innera <span>✦</span></span>
   </div>
@@ -1356,8 +1357,8 @@ footer {
       </div>
       <div class="about-story reveal">
         <p>어려서부터 하고 싶은 게 많았습니다. 그만큼 다양한 분야를 공부하고 경험했지만, 매년 새해 목표에 빠지지 않는 키워드가 하나 있었어요. 바로 <em>'성장'</em>이었습니다.</p>
-        <p>특정 자격증이나 기술을 넘어서, 더 근본적으로 나를 발전시킬 수 있는 무언가를 항상 갈망하고 있었어요. 그러다 우연히 알게 된 것이 <em>마인드셋</em>이었고, 보자마자 "아, 이거다"라는 확신이 들었습니다.</p>
-        <p>마인드셋을 접하면서 짧은 시간 안에 스스로 성장해 나아가고 있다는 걸 느꼈고, 내가 원하는 방향으로 살아간다는 게 이렇게나 즐거운 일이었다는 것도 처음 알았어요. <em>정말 살아있다는 기분</em>이 들었습니다.</p>
+        <p>특정 자격증이나 기술을 넘어서, 더 근본적으로 나를 발전시킬 수 있는 무언가를 항상 갈망하고 있었어요. 그러다 우연히 알게 된 것이 <em>'마인드셋'</em>이었고, 보자마자 "아, 이거다"라는 확신이 들었습니다.</p>
+        <p>마인드셋을 접하면서 짧은 시간 안에 스스로 성장해 나아가고 있다는 걸 느꼈고, 내가 원하는 방향으로 살아간다는 게 이렇게나 즐거운 일이었다는 것도 처음 알았어요. <em>비로소 내가 나로 살고 있다는 느낌이었어요.</em></p>
         <p>그렇게 살아가다 보니, 힘들어하는 주변 사람들이 눈에 들어오기 시작했어요. 도움을 주면서 큰 즐거움과 성취감을 느꼈고, 돌아보니 제가 가장 즐거워하는 일이 바로 <em>'누군가를 가르치고 도움을 주는 것'</em>이었다는 걸 깨달았습니다.</p>
         <p>그렇게 이네라가 시작되었습니다.</p>
       </div>
@@ -1371,19 +1372,19 @@ footer {
       <div class="about-values">
         <div class="value-item">
           <span class="value-dot"></span>
-          <span>완성된 전문가가 아닌, 함께 탐구해가는 사람으로서의 포지션</span>
+          <span>삶의 방향을 바꾸기 위해서는 내면의 변화가 가장 우선입니다.</span>
         </div>
         <div class="value-item">
           <span class="value-dot"></span>
-          <span>성공이나 부를 부정하지 않되, 그것이 전부가 아님</span>
+          <span>완성된 전문가가 아닌, 함께 탐구해가는 동반자로서 돕겠습니다.</span>
         </div>
         <div class="value-item">
           <span class="value-dot"></span>
-          <span>내면의 변화가 삶의 방향을 바꾼다</span>
+          <span>남의 기준이 아닌, 나만의 기준으로 살아갈 수 있도록 돕겠습니다.</span>
         </div>
         <div class="value-item">
           <span class="value-dot"></span>
-          <span>진짜 원하는 삶은 스스로 설계할 수 있다</span>
+          <span>진짜 원하는 삶을 스스로 설계할 수 있도록 돕겠습니다.</span>
         </div>
       </div>
     </div>
@@ -1414,7 +1415,7 @@ footer {
         <p class="slide-card-num">02</p>
         <div class="slide-card-bar"></div>
         <p class="slide-card-title">삶의 방향 설계</p>
-        <p class="slide-card-desc">막연하게 살아왔다면, 이제 내가 원하는 방향을 함께 그려봐요. 작은 나침반 하나부터 시작합니다.</p>
+        <p class="slide-card-desc">막연하게 살아왔다면, 이제 내가 원하는 방향을 함께 그려봐요. 방향을 찾는 첫 걸음은 지금 내 위치를 아는 것부터예요.</p>
       </div>
       <div class="slide-card">
         <p class="slide-card-num">03</p>
@@ -1511,20 +1512,20 @@ footer {
       <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-more">브런치에서 더 보기 →</a>
     </div>
     <div class="brunch-grid">
-      <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-card reveal reveal-delay-1">
+      <a href="https://brunch.co.kr/@5198ceb58bf9448/6" target="_blank" class="brunch-card reveal reveal-delay-1">
         <p class="brunch-date">브런치</p>
-        <p class="brunch-title">열심히 사는데 왜 공허할까</p>
-        <p class="brunch-desc">바쁘게 달리고 있는데 텅 빈 느낌이 드는 이유에 대해.</p>
+        <p class="brunch-title">방황의 끝에서 다시 마주한 나</p>
+        <p class="brunch-desc">'세상 끝의 카페'를 읽고 삶을 다시 묻다. 지금 내가 가는 이 길은, 내가 원한 길이 맞을까?</p>
       </a>
-      <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-card reveal reveal-delay-2">
+      <a href="https://brunch.co.kr/@5198ceb58bf9448/1" target="_blank" class="brunch-card reveal reveal-delay-2">
         <p class="brunch-date">브런치</p>
-        <p class="brunch-title">내가 진짜 원하는 게 뭔지 모르겠을 때</p>
-        <p class="brunch-desc">방향을 잃었다는 건 아직 찾고 있다는 뜻이에요.</p>
+        <p class="brunch-title">다이어트에 계속 실패하는 이유? 단순하지 않다</p>
+        <p class="brunch-desc">여러분은 정말 다이어트만 실패하고 계신가요? 마인드가 먼저입니다.</p>
       </a>
-      <a href="https://brunch.co.kr/@5198ceb58bf9448" target="_blank" class="brunch-card reveal reveal-delay-3">
+      <a href="https://brunch.co.kr/@5198ceb58bf9448/5" target="_blank" class="brunch-card reveal reveal-delay-3">
         <p class="brunch-date">브런치</p>
-        <p class="brunch-title">이네라의 글을 만나보세요</p>
-        <p class="brunch-desc">삶의 방향, 마인드셋, 내면의 변화에 대한 이야기를 씁니다.</p>
+        <p class="brunch-title">불안해하지 않는 게 우선일까</p>
+        <p class="brunch-desc">확신이 드는데 불안하다면, 그 불안함과 대화를 해봐야 한다.</p>
       </a>
     </div>
   </div>
@@ -1572,8 +1573,8 @@ document.addEventListener('mousemove', e => {
 });
 
 function animateCursor() {
-  rx += (mx - rx) * 0.12;
-  ry += (my - ry) * 0.12;
+  rx += (mx - rx) * 0.25;
+  ry += (my - ry) * 0.25;
   ring.style.left = rx + 'px';
   ring.style.top = ry + 'px';
   requestAnimationFrame(animateCursor);
