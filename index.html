@@ -56,7 +56,52 @@ body {
   .cta-banner { background: var(--bg-card) !important; }
 }
 
-/* ── 커스텀 커서 ── */
+/* ── 스플래시 ── */
+.splash {
+  position: fixed;
+  inset: 0;
+  background: #0a0f1a;
+  z-index: 99999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.splash.hide {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.splash-sub {
+  font-size: 10px;
+  letter-spacing: 0.35em;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 400;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.3s forwards;
+}
+
+.splash-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 8vw, 80px);
+  font-weight: 300;
+  color: var(--white);
+  letter-spacing: 0.2em;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 0.5s forwards;
+}
+
+.splash-line {
+  width: 40px;
+  height: 1px;
+  background: var(--accent);
+  opacity: 0;
+  animation: fadeIn 0.8s ease 0.9s forwards;
+}
 .cursor-ring {
   position: fixed;
   width: 28px;
@@ -542,10 +587,12 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
 
 .about-profile-wrap {
   margin-bottom: 32px;
+  overflow: hidden;
 }
 
 .about-profile-img {
-  width: 100%;
+  width: calc(100% + 2px);
+  margin-right: -2px;
   display: block;
   height: auto;
   transition: transform 0.6s ease;
@@ -1369,6 +1416,13 @@ footer {
 </head>
 <body>
 
+<!-- 스플래시 -->
+<div class="splash" id="splash">
+  <p class="splash-sub">Life Design Coaching</p>
+  <p class="splash-logo">INNERA</p>
+  <div class="splash-line"></div>
+</div>
+
 <!-- 커스텀 커서 -->
 <div class="cursor-ring" id="cursorRing"></div>
 <div class="cursor-dot" id="cursorDot"></div>
@@ -1393,12 +1447,12 @@ footer {
   <div class="hero-bg" id="heroBg"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <p class="hero-eyebrow">Innera · 라이프 스타일 코치</p>
     <h1 class="hero-title">
       여러분의 삶의<br>
       스타일을 <em>디자인</em>해<br>
       드립니다.
     </h1>
+    <p class="hero-eyebrow">Innera · 라이프 스타일 코칭</p>
     <p class="hero-sub">내면에서부터 시작되는 변화 — 진짜 내가 원하는 삶을 함께 찾아가는 곳</p>
     <div class="hero-actions">
       <a href="#test" class="btn-ghost">나침반 테스트 →</a>
@@ -1755,6 +1809,13 @@ window.addEventListener('scroll', () => {
 function toggleMobile() {
   document.getElementById('navbar').classList.toggle('nav-mobile-open');
 }
+
+// ── 스플래시 ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('splash').classList.add('hide');
+  }, 2000);
+});
 
 // ── 히어로 배경 로드 ──
 window.addEventListener('load', () => {
