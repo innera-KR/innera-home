@@ -102,38 +102,36 @@ body {
   opacity: 0;
   animation: fadeIn 0.8s ease 0.9s forwards;
 }
-.cursor-ring {
+.cursor-diamond {
   position: fixed;
-  width: 28px;
-  height: 28px;
+  width: 14px;
+  height: 14px;
   border: 1.5px solid var(--brand);
-  border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
+  transform: translate(-50%, -50%) rotate(45deg);
   transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-  transform: translate(-50%, -50%);
 }
 
 .cursor-dot {
   position: fixed;
-  width: 5px;
-  height: 5px;
+  width: 3px;
+  height: 3px;
   background: var(--brand);
   border-radius: 50%;
   pointer-events: none;
   z-index: 9999;
   transform: translate(-50%, -50%);
-  transition: transform 0.05s ease;
 }
 
-.cursor-ring.hover {
-  width: 48px;
-  height: 48px;
+.cursor-diamond.hover {
+  width: 24px;
+  height: 24px;
   border-color: var(--accent);
   background: rgba(200,169,110,0.08);
 }
 
-.cursor-ring.dark {
+.cursor-diamond.dark {
   border-color: rgba(255,255,255,0.6);
 }
 
@@ -1395,7 +1393,7 @@ footer {
   .footer-nav { flex-wrap: wrap; gap: 20px; }
   .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
   .hero-actions { flex-direction: column; align-items: flex-start; }
-  .cursor-ring, .cursor-dot { display: none; }
+  .cursor-diamond, .cursor-dot { display: none; }
   body { cursor: auto; }
   * { cursor: auto !important; }
 
@@ -1440,7 +1438,7 @@ footer {
 </div>
 
 <!-- 커스텀 커서 -->
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="cursor-diamond" id="cursorDiamond"></div>
 <div class="cursor-dot" id="cursorDot"></div>
 
 <!-- 네비 -->
@@ -1776,7 +1774,7 @@ footer {
 
 <script>
 // ── 커스텀 커서 ──
-const ring = document.getElementById('cursorRing');
+const diamond = document.getElementById('cursorDiamond');
 const dot = document.getElementById('cursorDot');
 let mx = 0, my = 0, rx = 0, ry = 0;
 
@@ -1787,10 +1785,10 @@ document.addEventListener('mousemove', e => {
 });
 
 function animateCursor() {
-  rx += (mx - rx) * 0.25;
-  ry += (my - ry) * 0.25;
-  ring.style.left = rx + 'px';
-  ring.style.top = ry + 'px';
+  rx += (mx - rx) * 0.18;
+  ry += (my - ry) * 0.18;
+  diamond.style.left = rx + 'px';
+  diamond.style.top = ry + 'px';
   requestAnimationFrame(animateCursor);
 }
 animateCursor();
@@ -1803,7 +1801,7 @@ function updateCursorColor() {
     const rect = sec.getBoundingClientRect();
     if (my > rect.top && my < rect.bottom && mx > rect.left && mx < rect.right) isDark = true;
   });
-  ring.classList.toggle('dark', isDark);
+  diamond.classList.toggle('dark', isDark);
   dot.classList.toggle('dark', isDark);
 }
 
@@ -1811,8 +1809,8 @@ document.addEventListener('mousemove', updateCursorColor);
 
 // 호버 효과
 document.querySelectorAll('a, button, .who-item, .brunch-card, .slide-card').forEach(el => {
-  el.addEventListener('mouseenter', () => ring.classList.add('hover'));
-  el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  el.addEventListener('mouseenter', () => diamond.classList.add('hover'));
+  el.addEventListener('mouseleave', () => diamond.classList.remove('hover'));
 });
 
 // ── 네비 스크롤 ──
