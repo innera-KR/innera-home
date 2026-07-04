@@ -629,6 +629,45 @@ nav.scrolled .nav-toggle span { background: var(--brand); }
   position: relative;
 }
 
+.about-coach-box {
+  margin-bottom: 32px;
+  padding: 0 2px;
+}
+
+.coach-cred {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 22px;
+}
+
+.coach-cred li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 14px;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.82);
+  margin-bottom: 12px;
+}
+
+.coach-cred li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 6px;
+  height: 6px;
+  background: var(--accent);
+  border-radius: 50%;
+}
+
+.coach-insight {
+  font-size: 14px;
+  line-height: 1.9;
+  color: rgba(255,255,255,0.6);
+  padding-left: 18px;
+  border-left: 2px solid rgba(200,169,110,0.5);
+}
+
 .about-brand-box::before {
   content: '';
   position: absolute;
@@ -1633,7 +1672,8 @@ footer {
         <h2 class="section-title" style="color:var(--white);">이네라를 시작하게 된 이야기</h2>
       </div>
       <div class="about-story reveal">
-        <p>저는 한번 마음먹으면 그걸 끝까지 해보는 편이었습니다. 하고 싶은 일이 생기면 목표를 정하고, 그 목표한 바는 끝까지 해냈어요. 58kg의 체중을 감량한 적도 있고, 고치기 어렵다는 안 좋은 습관들도 결국 바꿔냈습니다.</p>
+        <p>저는 한번 마음먹으면 그걸 끝까지 해보는 편이었습니다. 하고 싶은 일이 생기면 목표를 정하고, 그 목표한 바는 끝까지 해냈어요.</p>
+        <p>58kg을 감량했고, 지금도 그 체중을 유지하고 있습니다. 사실 더 중요한 건 감량이 아니라 유지예요. 대부분 목표를 이루고도 얼마 못 가 원래대로 돌아가니까요. 고치기 어렵다는 안 좋은 습관들도 마찬가지였습니다. 저는 그 차이를 만든 게 의지가 아니라는 걸, 나중에서야 알게 됐습니다.</p>
         <p>솔직히 저도 그 과정이 쉬웠던 적은 없어요. 정말 많이 힘들었고, 남들보다 덜 힘든 게 아니었어요. 똑같이 포기하고 싶었고, 똑같이 흔들렸어요. 다만 그 힘든 걸 견디고 끝까지 갔을 뿐이에요.</p>
         <p>사람들은 종종 "의지가 강하다", "독하다"는 말을 했어요. 그런데 어느 순간 그 말이 궁금해졌습니다. <em>왜 누군가는 끝까지 가고, 누군가는 중간에 멈출까?</em></p>
         <p>그 질문이 저를 마인드셋과 뇌과학, 그리고 심리학으로 이끌었습니다. 그리고 공부하면서 놀라운 걸 발견했어요.</p>
@@ -1649,6 +1689,14 @@ footer {
     <div class="about-right reveal">
       <div class="about-profile-wrap">
         <img src="INNERA_profile.png" alt="최유신 · Innera Life Design Coach" class="about-profile-img">
+      </div>
+      <div class="about-coach-box">
+        <ul class="coach-cred">
+          <li>50회 이상 1:1 코칭 진행</li>
+          <li>자기결정이론(SDT)·수용전념치료(ACT) 기반</li>
+          <li>뇌과학·마인드셋 이론을 직접 실행하고 검증</li>
+        </ul>
+        <p class="coach-insight">여러 분야를 직접 부딪히며 배웠습니다. 그 과정에서 분야는 달라도 '끝까지 해내는 사람'에게는 공통된 원리가 있다는 걸 발견했습니다.</p>
       </div>
       <div class="about-brand-box">
         <p class="brand-name">Innera</p>
@@ -2096,7 +2144,6 @@ slideWrap.addEventListener('wheel', e => {
   slideMove(goingDown ? 1 : -1);
 }, { passive: false });
 
-  
 // ── 상담 신청 ──
 async function submitConsult() {
   const name = document.getElementById('consultName').value.trim();
