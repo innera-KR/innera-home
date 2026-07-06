@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이네라의 글 · Innera</title>
+<meta name="description" content="지치지 않고 살고 싶었던 사람들을 위한 이네라의 글. 열심히 살았는데 왜 공허한지, 진짜 원하는 삶은 무엇인지에 대한 기록입니다.">
+<meta property="og:title" content="이네라의 글 · Innera">
+<meta property="og:description" content="열심히 살았는데 왜 공허한지, 진짜 원하는 삶은 무엇인지에 대한 기록.">
+<meta property="og:image" content="https://innera.kr/og-home-final.png">
+<meta property="og:url" content="https://innera.kr/journal.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Noto+Sans+KR:wght@300;400;500&family=Noto+Serif+KR:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --brand: #0c2f5d;
+  --accent: #c8a96e;
+  --bg: #f5f2ec;
+  --bg-card: #faf8f4;
+  --text-main: #1a1a2e;
+  --text-body: #3a3a4e;
+  --text-muted: #8a8a9e;
+  --border: rgba(12,47,93,0.1);
+  --white: #ffffff;
+  --dark: #0a0f1a;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; color-scheme: light; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text-body);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { text-decoration: none; color: inherit; }
+
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 20px 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(245,242,236,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--brand);
+}
+
+.nav-links {
+  display: flex;
+  gap: 40px;
+  list-style: none;
+  align-items: center;
+}
+
+.nav-links a {
+  font-size: 14px;
+  color: var(--text-body);
+  position: relative;
+  transition: color 0.3s;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px; left: 0; right: 0;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s;
+}
+
+.nav-links a:hover { color: var(--brand); }
+.nav-links a:hover::after { transform: scaleX(1); }
+.nav-links a.active { color: var(--brand); font-weight: 500; }
+.nav-links a.active::after { transform: scaleX(1); }
+
+.nav-cta {
+  padding: 10px 24px;
+  border: 1px solid var(--brand);
+  color: var(--brand) !important;
+  transition: all 0.3s;
+}
+.nav-cta:hover { background: var(--brand); color: var(--white) !important; }
+.nav-cta::after { display: none; }
+
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; }
+.nav-toggle span { width: 24px; height: 2px; background: var(--brand); transition: all 0.3s; }
+
+/* 히어로 */
+.journal-hero {
+  padding: 180px 64px 80px;
+  text-align: center;
+  background: var(--dark);
+  position: relative;
+  overflow: hidden;
+}
+
+.journal-hero::before {
+  content: '';
+  position: absolute;
+  top: -40%; right: -10%;
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(200,169,110,0.13) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.journal-hero-eyebrow {
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.journal-hero h1 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(38px, 5.5vw, 60px);
+  font-weight: 300;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.journal-hero h1 em { font-style: italic; color: var(--accent); }
+
+.journal-hero p {
+  font-size: 15px;
+  color: rgba(255,255,255,0.72);
+  max-width: 500px;
+  margin: 0 auto;
+  font-weight: 300;
+  line-height: 1.8;
+}
+
+/* 목록 */
+.journal-body {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 80px 32px 100px;
+}
+
+.journal-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 40px;
+  padding: 36px 0;
+  border-bottom: 1px solid var(--border);
+  text-decoration: none;
+  color: inherit;
+}
+
+.journal-item:first-child { border-top: 1px solid var(--border); }
+
+.journal-text { flex: 1; min-width: 0; }
+
+.journal-num {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+
+.journal-title {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 23px;
+  font-weight: 600;
+  color: var(--brand);
+  line-height: 1.4;
+  margin-bottom: 12px;
+  transition: color 0.25s ease;
+}
+
+.journal-item:hover .journal-title { color: var(--accent); }
+
+.journal-desc {
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--text-muted);
+  max-width: 580px;
+}
+
+.journal-thumb {
+  flex-shrink: 0;
+  width: 210px;
+  height: 140px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: var(--bg-card);
+}
+
+.journal-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.journal-item:hover .journal-thumb img { transform: scale(1.06); }
+
+/* 하단 CTA */
+.journal-cta {
+  max-width: 920px;
+  margin: 0 auto;
+  padding: 0 32px 110px;
+}
+
+.journal-cta-box {
+  background: var(--brand);
+  border-radius: 16px;
+  padding: 56px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.journal-cta-box::before {
+  content: '';
+  position: absolute;
+  bottom: -50%; left: -10%;
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, rgba(200,169,110,0.12) 0%, transparent 70%);
+}
+
+.journal-cta-box h2 {
+  font-family: 'Noto Serif KR', serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.journal-cta-box p {
+  font-size: 14px;
+  color: rgba(255,255,255,0.7);
+  margin-bottom: 28px;
+  position: relative;
+  line-height: 1.7;
+}
+
+.journal-cta-buttons {
+  display: flex;
+  gap: 14px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+.btn-gold {
+  padding: 15px 32px;
+  background: var(--accent);
+  color: var(--brand);
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.btn-gold:hover { background: #d8bd88; transform: translateY(-2px); }
+
+.btn-outline-light {
+  padding: 15px 32px;
+  border: 1px solid rgba(255,255,255,0.4);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 8px;
+  transition: all 0.3s;
+}
+.btn-outline-light:hover { border-color: var(--accent); color: var(--accent); }
+
+footer {
+  background: var(--dark);
+  padding: 64px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  max-width: 1100px;
+  margin: 0 auto 48px;
+}
+.footer-brand p {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.8);
+  letter-spacing: 0.15em;
+  margin-bottom: 8px;
+}
+.footer-brand span {
+  font-size: 12px;
+  color: rgba(255,255,255,0.25);
+  font-weight: 300;
+}
+.footer-nav {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+.footer-nav a {
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  text-decoration: none;
+  letter-spacing: 0.08em;
+  transition: color 0.2s;
+}
+.footer-nav a:hover { color: var(--accent); }
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: rgba(255,255,255,0.2);
+}
+
+.kakao-float {
+  position: fixed;
+  right: 28px; bottom: 28px;
+  z-index: 90;
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  background: #FEE500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.18);
+  transition: transform 0.25s ease;
+}
+.kakao-float:hover { transform: translateY(-3px) scale(1.05); }
+
+@media (max-width: 768px) {
+  nav { padding: 16px 24px; }
+  .nav-links { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-mobile-open .nav-links {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 56px; left: 0; right: 0;
+    background: rgba(245,242,236,0.98);
+    padding: 24px 32px;
+    gap: 20px;
+    border-bottom: 1px solid var(--border);
+  }
+  .journal-hero { padding: 130px 24px 60px; }
+  .journal-body { padding: 50px 20px 60px; }
+  .journal-item {
+    flex-direction: column-reverse;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 28px 0;
+  }
+  .journal-thumb { width: 100%; height: 190px; }
+  .journal-title { font-size: 20px; }
+  .journal-cta { padding: 0 20px 80px; }
+  .journal-cta-box { padding: 40px 24px; }
+  .kakao-float { right: 18px; bottom: 18px; width: 54px; height: 54px; }
+  footer { padding: 40px 24px; }
+  .footer-top { flex-direction: column; gap: 24px; margin-bottom: 32px; }
+  .footer-nav { flex-wrap: wrap; gap: 20px; }
+  .footer-bottom { flex-direction: column; gap: 12px; text-align: center; }
+}
+</style>
+</head>
+<body>
+
+<nav id="nav">
+  <a href="index.html" class="nav-logo">Innera</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">About</a></li>
+    <li><a href="index.html#test">Test</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="journal.html" class="active">Journal</a></li>
+    <li><a href="index.html#consult" class="nav-cta">상담 신청</a></li>
+  </ul>
+  <div class="nav-toggle" onclick="document.getElementById('nav').classList.toggle('nav-mobile-open')">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<section class="journal-hero">
+  <p class="journal-hero-eyebrow">이네라의 글 · 마음온도계</p>
+  <h1>지치지 않고<br><em>살고 싶었다</em></h1>
+  <p>열심히 살았는데 왜 이렇게 공허할까. 진짜 원하는 삶은 무엇일까.<br>그 질문에 대한 11편의 기록입니다.</p>
+</section>
+
+<div class="journal-body">
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/21" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">11화</p>
+      <h2 class="journal-title">버티고 있는 당신에게</h2>
+      <p class="journal-desc">지쳐있던 그 시간은 끝이 아니라 진짜 삶을 향한 시작이었어요. 지금 당신이 원하는 삶은 어떤 모습인가요.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/5gTh6xW6VuluChLpOHfnnAGKi90.jpg" alt="버티고 있는 당신에게" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/20" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">10화</p>
+      <h2 class="journal-title">당신은 지금 누구의 삶을 살고 있나요</h2>
+      <p class="journal-desc">나도 모르게 남의 기준에 맞춰 살고 있진 않은지, 지금 내 삶의 주인이 누구인지 물어봅니다.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/QxwfiVGyj2KfNHLC_zgL3brqM68.jpg" alt="당신은 지금 누구의 삶을 살고 있나요" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/19" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">09화</p>
+      <h2 class="journal-title">내가 진짜 원하는 삶은 무엇인가</h2>
+      <p class="journal-desc">"무엇을 할까"가 아니라 "어떻게 살고 싶은가". 방향이 먼저 잡혀야 방법이 의미를 가져요.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/fvwPHjlrU7aAwsH7bzR95nRPdwQ.jpg" alt="내가 진짜 원하는 삶은 무엇인가" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/18" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">08화</p>
+      <h2 class="journal-title">사람은 정말 바뀔 수 있을까</h2>
+      <p class="journal-desc">사람은 바뀝니다. 행동이 아니라 '어떤 사람이 되고 싶은가'에서 변화가 시작돼요.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/c5-pDZ4fxdG_PicsvH3v7-8TyXQ.jpg" alt="사람은 정말 바뀔 수 있을까" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/17" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">07화</p>
+      <h2 class="journal-title">쉬면서도 쉬지 못하는 사람들</h2>
+      <p class="journal-desc">쉬어도 쉬어지지 않는 건 의지의 문제가 아니에요. 진짜 회복이 무엇인지 뇌의 관점에서 들여다봅니다.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/853h94BDBN5EIZYHcVMsI6Bc7qA.jpg" alt="쉬면서도 쉬지 못하는 사람들" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/16" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">06화</p>
+      <h2 class="journal-title">비교가 멈추지 않는 이유</h2>
+      <p class="journal-desc">비교를 멈추지 못하는 건 의지가 약해서가 아니라 뇌의 기본 설정이에요. 그 비교를 동력으로 바꾸는 법.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/SszCJbvQ855JhconEzi_HrlfJPA.jpg" alt="비교가 멈추지 않는 이유" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/15" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">05화</p>
+      <h2 class="journal-title">나는 내가 뭘 원하는지 알고 있다고 생각했다</h2>
+      <p class="journal-desc">원하던 걸 이뤘는데 왜 허무할까. 목표와 의미는 다르다는 것을, 저는 한참 뒤에야 알게 됐습니다.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/IPWcKB_aicICJLi7oNB-F8wvEog.jpg" alt="나는 내가 뭘 원하는지 알고 있다고 생각했다" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/14" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">04화</p>
+      <h2 class="journal-title">하고 싶은 게 없어요</h2>
+      <p class="journal-desc">하고 싶은 게 없는 게 아니에요. 원한다는 감각 자체를 잊어버린 것일 수 있어요.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/KBB7D7nBjVCVuDA9ZH1hgcaVbHA.jpg" alt="하고 싶은 게 없어요" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/13" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">03화</p>
+      <h2 class="journal-title">월요일이 두려워지기 시작한 날</h2>
+      <p class="journal-desc">설레던 일이 어느 순간 무거워졌다면, 그건 지금의 방식으로는 더 나아가기 어렵다는 신호일 수 있어요.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/RgymIb9HQa78qlmDYVLT63KVYno.jpg" alt="월요일이 두려워지기 시작한 날" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/11" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">02화</p>
+      <h2 class="journal-title">번아웃은 갑자기 오지 않는다</h2>
+      <p class="journal-desc">번아웃은 어느 날 갑자기 오지 않아요. 몸은 이미 오래전부터 신호를 보내고 있었습니다.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/doULCVva2jHeRvfxgQjnEpp6QHU.jpg" alt="번아웃은 갑자기 오지 않는다" loading="lazy"></div>
+  </a>
+
+  <a href="https://brunch.co.kr/@5198ceb58bf9448/9" target="_blank" rel="noopener" class="journal-item">
+    <div class="journal-text">
+      <p class="journal-num">01화</p>
+      <h2 class="journal-title">나는 왜 열심히 할수록 무너지는 걸까</h2>
+      <p class="journal-desc">열심히 달려왔기 때문에, 방향을 물어볼 여유조차 없었던 것일 수 있어요. 지침은 몸이 보내는 신호입니다.</p>
+    </div>
+    <div class="journal-thumb"><img src="https://img1.kakaocdn.net/thumb/R1280x0.fjpg/?fname=http://t1.kakaocdn.net/brunch/service/user/h3iH/image/1jXI_MEn83VlZ-8You7DbFiYc1w.jpg" alt="나는 왜 열심히 할수록 무너지는 걸까" loading="lazy"></div>
+  </a>
+
+</div>
+
+<div class="journal-cta">
+  <div class="journal-cta-box">
+    <h2>글을 읽고 마음이 움직였다면</h2>
+    <p>지금 내가 어디쯤 서 있는지, 함께 들여다보는 시간을 가져보세요.</p>
+    <div class="journal-cta-buttons">
+      <a href="index.html#consult" class="btn-gold">무료 상담 신청하기</a>
+      <a href="https://innera-kr.github.io/innera-quiz/" target="_blank" rel="noopener" class="btn-outline-light">나침반 테스트 하기</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <p>Innera</p>
+      <span>여러분의 삶의 스타일을 디자인해 드립니다.</span>
+    </div>
+    <ul class="footer-nav">
+      <li><a href="index.html#about">About</a></li>
+      <li><a href="index.html#test">Test</a></li>
+      <li><a href="faq.html">FAQ</a></li>
+      <li><a href="journal.html">Journal</a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Innera. All rights reserved.</span>
+    <span>innera.life@gmail.com</span>
+  </div>
+</footer>
+
+<a href="https://pf.kakao.com/_eaUPX" target="_blank" rel="noopener" class="kakao-float" aria-label="카카오톡 상담">
+  <svg viewBox="0 0 24 24" width="30" height="30" aria-hidden="true"><path fill="#3A1D1D" d="M12 3C6.477 3 2 6.477 2 10.5c0 2.57 1.607 4.83 4.038 6.18-.178.63-.644 2.28-.738 2.635-.115.44.161.434.34.316.14-.093 2.23-1.515 3.135-2.13.39.055.79.084 1.225.084 5.523 0 10-3.477 10-7.585S17.523 3 12 3z"/></svg>
+</a>
+
+</body>
+</html>
