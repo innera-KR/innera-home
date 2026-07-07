@@ -35,7 +35,7 @@
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; color-scheme: light; }
+html { scroll-behavior: smooth; color-scheme: light only; }
 
 body {
   font-family: 'Noto Sans KR', sans-serif;
@@ -44,6 +44,8 @@ body {
   overflow-x: hidden;
   cursor: none;
   -webkit-text-size-adjust: 100%;
+  color-scheme: light only;
+  forced-color-adjust: none;
 }
 
 @media (prefers-color-scheme: dark) {
