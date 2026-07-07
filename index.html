@@ -34,6 +34,45 @@
   --dark: #0a0f1a;
 }
 
+/* 삼성 브라우저 다크모드 안내 배너 */
+.samsung-notice {
+  position: fixed;
+  left: 0; right: 0; bottom: 0;
+  z-index: 9999;
+  background: #0c2f5d;
+  color: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 13px 20px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-size: 13px;
+  line-height: 1.5;
+  box-shadow: 0 -4px 20px rgba(0,0,0,0.15);
+}
+.samsung-notice.show { display: flex; }
+.samsung-notice span { color: rgba(255,255,255,0.9); }
+.samsung-notice b { color: #c8a96e; font-weight: 500; }
+.samsung-notice-close {
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.15);
+  border: none;
+  color: #fff;
+  width: 24px; height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.samsung-notice-close:hover { background: rgba(255,255,255,0.28); }
+@media (max-width: 600px) {
+  .samsung-notice { font-size: 12px; padding: 12px 16px; gap: 10px; }
+}
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; color-scheme: light only; }
 
@@ -2158,7 +2197,7 @@ footer {
       <a href="faq.html" class="consult-faq-link">자주 묻는 질문 보기 →</a>
     </div>
     <div class="consult-form-box reveal">
-      <p class="form-title">무료 상담 신청하기</p>
+      <p class="form-title">상담 신청하기</p>
       <div class="form-group">
         <label class="form-label">이름</label>
         <input type="text" class="form-input" placeholder="이름을 입력해주세요" id="consultName">
@@ -2255,7 +2294,7 @@ footer {
   <div class="cta-inner reveal">
     <h2 class="cta-title">지금 이 질문을 하고 있다는 것,<br>그 자체가 이미 시작이에요.</h2>
     <p class="cta-sub">이네라는 정답을 알려주는 곳이 아니에요.<br>당신이 진짜 원하는 삶이 뭔지, 함께 들여다보는 곳이에요.</p>
-    <a href="#consult" class="btn-primary-fill">1:1 무료 상담 신청하기</a>
+    <a href="#consult" class="btn-primary-fill">1:1 상담 신청하기</a>
   </div>
 </section>
 
@@ -2554,6 +2593,26 @@ async function submitConsult() {
       <p style="font-size:14px; color:var(--text-muted); font-weight:300; line-height:1.8;">${name}님, 곧 연락드릴게요.<br>잠시만 기다려주세요.</p>
     </div>
   `;
+}
+</script>
+
+<!-- 삼성 브라우저 다크모드 안내 배너 -->
+<div class="samsung-notice" id="samsungNotice">
+  <span>화면이 어둡게 보이시나요? 삼성 인터넷 <b>메뉴 → 밝은 웹페이지</b>를 선택하면 정상적으로 보여요.</span>
+  <button class="samsung-notice-close" onclick="closeSamsungNotice()" aria-label="닫기">✕</button>
+</div>
+<script>
+(function() {
+  var ua = navigator.userAgent || '';
+  if (ua.indexOf('SamsungBrowser') !== -1 && !localStorage.getItem('samsungNoticeClosed')) {
+    var el = document.getElementById('samsungNotice');
+    if (el) el.classList.add('show');
+  }
+})();
+function closeSamsungNotice() {
+  var el = document.getElementById('samsungNotice');
+  if (el) el.classList.remove('show');
+  try { localStorage.setItem('samsungNoticeClosed', '1'); } catch(e) {}
 }
 </script>
 </body>
